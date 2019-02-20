@@ -25,8 +25,8 @@ function displayPlatforms(games) {
 
     var game = games.find(g => g.id === +gameId); // find the game in the games collection passed in to this method. note that +gameId converts it to a number for comparison
     if (game.platformIds.length > 0) { // if this game object has platform look them up
-    // make a comma delimited string of the platformIds. The api endpoint will only allow for 10 at a time. So for now we'll only take 10.
-      var platforms = game.platformIds.slice(-10).join(', '); 
+      // make a comma delimited string of the platformIds. The api endpoint will only allow for 10 at a time. So for now we'll only take 10.
+      var platforms = game.platformIds.slice(-10).join(', ');
       var $platforms = $game.find('.platforms'); // find the platforms container by class name
       fetchGameData('platforms', `fields *; where id = (${platforms});`, (response) => {
         game.platforms = response; // take the response object and add it to the game in the games collection
@@ -49,28 +49,35 @@ function getListItems(games) {
 
 // render an individual game <li> element
 function getGameHtml(game) {
-  // the span with class platform is a placeholder for injecting the platform names later
-  return `<li data-game-id="${game.id}">
-  <strong>&nbsp;${game.title}</strong></br>
-  <strong>Platforms:</strong>&nbsp;<span class="platforms"></span></br>
-  <strong></strong>&nbsp;${getImage(game)}</br>
-  <strong>Summary:</strong>&nbsp;${game.summary}</br>
-  <strong>Story Line:</strong>&nbsp;${game.story}</br>
-  
-</li>
-`;
+
+  var html = `<li data-game-id="${game.id}">
+ <strong>&nbsp;${game.title}</strong></br>`;
+
+  if (game.platformIds > 0) {
+    html += '<strong>Platforms:</strong>&nbsp;<span class="platforms"></span></br>'
+  };
+  if (game.coverImageId > 0) {
+    html += `<strong></strong>&nbsp;${getImage(game)}</br>`;
+  };
+  if (game.summary.length > 0) {
+      html += `<strong>Summary:</strong>&nbsp;${game.summary}</br>`;
+  };
+  if (game.story.length > 0) {
+      html +=  `<strong>Storyline:</strong>&nbsp;${game.story}</br>`;
+  };
+  return html;
 }
 
 function getImage(game) {
 
   if (!game.coverImg) return '';
 
-  return `<img src="${game.coverImg.src}"" width="25%" alt="${game.title} cover art" style="vertical-align: top;">`;
+  return `<img src="${game.coverImg.src}"" width="300" alt="${game.title} cover art" style="vertical-align: top;">`;
 }
 
 //Get Parameters from API
 function getVideoGames(query) {
-  fetchGameData(`games`, `fields id, name, summary, storyline, cover, platforms; where name="${query}";`, (response) => {
+  fetchGameData(`games`, `fields id, name, summary, storyline, cover, platforms; where name~*"${query}"*;`, (response) => {
     var games = response.map(g => {
       return {
         id: g.id,
@@ -84,13 +91,14 @@ function getVideoGames(query) {
     var coverImageIds = games.map(g => g.coverImageId).join(', ');
 
     fetchGameData(`covers`, `fields *;where id=(${coverImageIds});`, response => {
+      const size = 'cover_big';
       var images = response.map(i => {
         return {
           id: i.id,
           gameId: i.game,
           height: i.height,
           width: i.width,
-          src: i.url
+          src: `https://images.igdb.com/igdb/image/upload/t_${size}/${i.image_id}.jpg` //i.url
         }
       });
 
