@@ -51,19 +51,24 @@ function getListItems(games) {
 function getGameHtml(game) {
 
   var html = `<li data-game-id="${game.id}">
- <strong>&nbsp;${game.title}</strong></br>`;
+ <h2>&nbsp;${game.title}</h2></br>`;
+
+  if (game.coverImageId > 0) {
+    html += `<div id="coverimg">${getImage(game)}</div></br></br>`;
+  }; 
 
   if (game.platformIds > 0) {
     html += '<strong>Platforms:</strong>&nbsp;<span class="platforms"></span></br>'
   };
-  if (game.coverImageId > 0) {
-    html += `<strong></strong>&nbsp;${getImage(game)}</br>`;
-  };
+
   if (game.summary.length > 0) {
-      html += `<strong>Summary:</strong>&nbsp;${game.summary}</br>`;
-  };
+      html += `<strong>Summary:</strong>&nbsp;<span id="content">${game.summary}</span></br></br>`;
+  } else if (game.summary.length == 0 && game.story.length == 0) {
+    html += '<strong class="noInfo">Sorry there is no info on this game. It was either cancelled or still in development.</strong></li>';
+  }; 
+
   if (game.story.length > 0) {
-      html +=  `<strong>Storyline:</strong>&nbsp;${game.story}</br>`;
+      html +=  `<strong>Storyline:</strong>&nbsp;<span id="content">${game.story}</span></br></li>`;
   };
   return html;
 }
@@ -115,7 +120,8 @@ function watchForm() {
   $('form').submit(event => {
     event.preventDefault();
     $('#results').addClass('hidden');
-    const searchTerm = $('#js-search-term').val();
+    const searchTerm = $('#js-search-term').val(); // get search string
+    $('#js-error-message').text(''); // clear error messages
     getVideoGames(searchTerm);
   });
 }
