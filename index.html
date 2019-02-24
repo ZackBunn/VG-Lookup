@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,23 +10,31 @@
 </head>
 
 <body>
-	<!-- <div class="container"> -->
+    <header role="navigation" alt="Menu">
 		<div class="menu">
         <h1 class="full-text">VG Lookup</h1>
         <h1 class="short-text">VGL</h1>
         <p class="subtitle"> Quick Resource for Video Games</p>
-			<form id="js-form">
-				<label for="search-term">Type in a Title</label>
-            <input type="text" name="search-term" id="js-search-term" required>
-            <input type="submit" value="Search" id="js-search-button">
-        </form>
+			<form id="js-form" role="form">
+        <fieldset alt="Search Bar">
+            <legend>Video Game Search</legend> 
+            <label for="search-term">Type in a Title</label>
+            <input type="text" role="search" name="search-term" id="js-search-term" required>
+            <input type="submit" role="button" value="Search" id="js-search-button">
+        </fieldset>
+      </form>
     </div>
+    </header>
+    <main role="main" alt"Search Results">
+      <div role="region" aria-live:"polite">
         <p id="js-error-message" class="error-message"></p>
+        <p id="landing">Welcome! Search for any Video Game or DLC in the box above.</p>
         <section id="results" class="hidden">
           <ul id="results-list">
           </ul>          
         </section>
-    <!-- </div> -->
+      </div>
+    </main>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="index.js"></script>
 </body>
