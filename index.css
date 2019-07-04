@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-} 
+}
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -13,7 +13,7 @@ h1 {
   font-family: 'Domine', serif;
   text-shadow: -1px 0 #3b3e48, 0 1px #3b3e48, 1px 0 #3b3e48, 0 -1px #3b3e48;
 }
-.short-text { 
+.short-text {
   display: none;
 }
 
@@ -28,15 +28,13 @@ legend {
 p.subtitle {
   margin: 0px auto 0px 4px;
   line-height: 42px;
-} 
+}
 
 .menu h1,
-.menu p
-.menu form {
+.menu p .menu form {
   vertical-align: center;
 }
-.menu h1
-.menu p{
+.menu h1 .menu p {
   text-align: center;
 }
 
@@ -56,29 +54,29 @@ p.subtitle {
   box-shadow: 0 8px 2px -2px #3b3e48;
 }
 
-input[type=text] {
+input[type='text'] {
   border: 2px solid #3b3e48;
   border-radius: 4px;
   background-color: lightgrey;
   color: #33373f;
 }
 
-#results-list div img{
+#results-list div img {
   display: inline;
 }
 
-input[type=submit] {
-  padding:5px 15px; 
-  background: #626775; 
-  border:0 none;
-  cursor:pointer;
+input[type='submit'] {
+  padding: 5px 15px;
+  background: #626775;
+  border: 0 none;
+  cursor: pointer;
   color: #f2f2f2;
   -webkit-border-radius: 4px;
-  border-radius: 4px; 
+  border-radius: 4px;
 }
 
-input[type=submit]:hover {
-  background-color: #3b3e48;  
+input[type='submit']:hover {
+  background-color: #3b3e48;
 }
 
 #landing {
@@ -89,7 +87,7 @@ input[type=submit]:hover {
   color: #f2f2f2;
 }
 
-#results-list{ 
+#results-list {
   margin-left: 15%;
   margin-right: 15%;
 }
@@ -98,27 +96,28 @@ ul {
   padding: 0;
 }
 
-ul li #coverimg{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 95%;
+ul li .coverimg {
+  display: inline-block;
+  min-width: 300px;
+  margin-bottom: 20px;
 }
 
 li {
   list-style: none;
   background-color: #3b3e48;
-  padding:  0px 2px 8px 2px;
+  padding: 10px 2px 8px 2px;
   margin: 35px 10px;
   box-shadow: 0px 10px 8px 10px #3b3e48;
 }
 
 h2 {
   background: #ce2029;
+  background-image: linear-gradient(to bottom, #ce2029, darkred);
   border-radius: 3px;
   color: #f2f2f2;
-  padding: 0px 16px;
+  padding: 7px 16px;
   font-family: 'Domine', serif;
+  margin-top: 16px;
 }
 
 strong {
@@ -128,7 +127,7 @@ strong {
   line-height: 1.2;
 }
 
-ul li #info{
+ul li .info {
   margin-bottom: 10px;
 }
 .noInfo {
@@ -138,7 +137,8 @@ ul li #info{
   font-weight: normal;
 }
 
-button, input[type="text"] {
+button,
+input[type='text'] {
   padding: 5px;
 }
 
@@ -147,53 +147,61 @@ button:hover {
 }
 
 .error-message {
-    color: red;
-    text-align: center;
-    font-size: 18px;
-    text-shadow: -1px 0 #3b3e48, 0 1px #3b3e48, 1px 0 #3b3e48, 0 -1px #3b3e48;
+  color: red;
+  text-align: center;
+  font-size: 18px;
+  text-shadow: -1px 0 #3b3e48, 0 1px #3b3e48, 1px 0 #3b3e48, 0 -1px #3b3e48;
 }
 
 .hidden {
   display: none;
 }
 
-li span{
+li span {
   color: #f2f2f2;
   line-height: 1.2px;
 }
 
 @media screen and (max-width: 1440px) {
+  .menu h1 {
+    margin: 0;
+  }
 
- .menu h1 
- {
-   margin: 0;
- }
-
- .menu form {
+  .menu form {
     margin: 0 10px 0 0;
- }
-
-  
+  }
 }
-@media screen and (max-width: 944px) {
 
+.data-row {
+  width: 57%;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 10px;
+}
+
+@media screen and (max-width: 1100px) {
+  .data-row {
+    width: 100% !important;
+  }
+
+  .coverimg {
+    text-align: center;
+    min-width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 944px) {
   p.subtitle {
     display: none;
   }
   .menu form {
     margin: 0 10px 0 auto;
   }
-  #results-list{ 
+  #results-list {
     margin-left: 0;
     margin-right: 0;
   }
-  
-  ul li #coverimg{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 300px;
-  }
+
   #landing {
     font-size: 22px;
   }
@@ -204,12 +212,12 @@ li span{
 }
 
 @media screen and (max-width: 648px) {
-  h1{
+  h1 {
     font-size: 28px;
     line-height: 1.4;
   }
- 
-  ul li #coverimg {
+
+  ul li .coverimg {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -221,49 +229,45 @@ li span{
   img {
     width: 224.4px;
   }
-  input[type=text] {
+  input[type='text'] {
     width: 121px;
   }
- .short-text { 
-   display: inline-block;
-   font-size: 34px;
-   line-height: 1.15;
+  .short-text {
+    display: inline-block;
+    font-size: 34px;
+    line-height: 1.15;
   }
 
- .full-text { 
-   display: none; 
-   }
-  
+  .full-text {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 546px) {
-  h1{
+  h1 {
     font-size: 28px;
     line-height: 1.4;
   }
-  ul li #coverimg {
+  ul li .coverimg {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 187px;
   }
-  
+
   img {
     width: 187px;
   }
 
-  input[type=text] {
+  input[type='text'] {
     width: 100px;
   }
- .short-text { 
-   display: inline-block;
-   font-size: 34px;
-   line-height: 1.15;
+  .short-text {
+    display: inline-block;
+    font-size: 34px;
+    line-height: 1.15;
   }
- .full-text { 
-   display: none; 
-   }
-  
+  .full-text {
+    display: none;
+  }
 }
-
-
